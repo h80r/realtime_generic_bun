@@ -12,6 +12,10 @@ const saveData = async (data: any) => await Bun.write('data.json', JSON.stringif
 let data = await loadData();
 const server = Bun.serve({
   port: 3003,
+  tls: {
+    cert: Bun.file('cert.pem'),
+    key: Bun.file('key.pem'),
+  },
   fetch: (req, server) => {
     if (server.upgrade(req)) return;
     return new Response('Upgrade Failed', { status: 500 });

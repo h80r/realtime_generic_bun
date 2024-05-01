@@ -176,3 +176,7 @@ dist
 
 # Local data storage
 data.json
+
+# Self-Signed Certificate
+cert.pem
+key.pem
