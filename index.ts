@@ -1,3 +1,5 @@
+import recursiveObjectParser from './src/obj_parser';
+
 const log = (msg: string) => console.log(`[${new Date().toLocaleTimeString()}] ${msg}`);
 
 const loadData = async () => {
@@ -38,7 +40,8 @@ const server = Bun.serve({
 const handleStop = () => { saveData(data); server.stop(true); };
 
 const handleUpdate = (payload: object) => {
-  log(`Data Updated: ${JSON.stringify(payload)}`);
-  data = payload;
+  const parsedData = recursiveObjectParser(payload);
+  log(`Data Updated: ${JSON.stringify(parsedData)}`);
+  data = parsedData;
   server.publish('data', JSON.stringify(data));
 };
