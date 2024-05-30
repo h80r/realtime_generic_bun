@@ -39,8 +39,8 @@ const server = Bun.serve({
 
 const handleStop = () => { saveData(data); server.stop(true); };
 
-const handleUpdate = (payload: object) => {
-  const parsedData = recursiveObjectParser(payload);
+const handleUpdate = async (payload: object) => {
+  const parsedData = await recursiveObjectParser(payload);
   log(`Data Updated: ${JSON.stringify(parsedData)}`);
   data = parsedData;
   server.publish('data', JSON.stringify(data));
